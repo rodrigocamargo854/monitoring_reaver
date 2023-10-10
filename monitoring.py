@@ -24,6 +24,7 @@ import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+last_data = None
 
 while True:
     try:
@@ -35,15 +36,15 @@ while True:
         print(last_nivel)
 
 
-        if last_nivel:
-            last_niveis_length = len(last_nivel["niveis"])
+        if last_data:
+            last_niveis_length = len(last_data["niveis"])
 
             if current_niveis_length > last_niveis_length:
                 message = f"Houve uma atualização! Nível do rio: {last_nivel}"
                 send_telegram_message(CHAT_ID, TELEGRAM_TOKEN, message)
                 print(message)
 
-        last_nivel = data
+        last_data = data
         time.sleep(300)
 
     except requests.exceptions.RequestException as e:
