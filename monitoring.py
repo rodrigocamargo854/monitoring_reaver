@@ -4,16 +4,14 @@ import time
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Carrega as variáveis do arquivo .env
+load_dotenv()  
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-
 url_alertablu = (
     "https://alertablu.blumenau.sc.gov.br/static/data/nivel_oficial.json?a=8372536"
 )
-last_niveis_length = 0  # Inicialmente definido como 0
 
 
 def send_telegram_message(chat_id, token, message):
@@ -21,8 +19,6 @@ def send_telegram_message(chat_id, token, message):
     requests.get(base_url)
 
 
-# send_telegram_message(CHAT_ID, TELEGRAM_TOKEN, "Mensagem de teste do AlertaBlu!")
-# print("Mensagem de teste enviada!")
 
 import urllib3
 
@@ -38,6 +34,7 @@ while True:
         last_nivel = data["niveis"][-1]["nivel"]
 
         print(last_nivel)
+
 
         if last_data:
             last_niveis_length = len(last_data["niveis"])
